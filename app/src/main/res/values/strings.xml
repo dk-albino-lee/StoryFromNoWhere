@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Story From NoWhere</string>
+    <string name="thumbnail">Thumbnail of the app</string>
+    <string name="sign_up">가입하기</string>
+    <string name="sign_in">로그인</string>
+    <string name="set_auto_sign_in">자동 로그인 하기</string>
+    <string name="nickname">별명</string>
+    <string name="password">비밀번호</string>
 </resources>
