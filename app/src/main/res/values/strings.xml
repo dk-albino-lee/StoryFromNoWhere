@@ -6,4 +6,8 @@
     <string name="set_auto_sign_in">자동 로그인 하기</string>
     <string name="nickname">별명</string>
     <string name="password">비밀번호</string>
+
+    <string name="error_title">오류가 발생했습니다.</string>
+    <string name="network_error_content">데이터 수신에 실패했습니다.\n네트워크 상태를 확인해주세요.</string>
+
 </resources>

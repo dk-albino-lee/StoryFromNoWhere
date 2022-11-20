@@ -27,8 +27,16 @@ class SignInFragment : BaseFragment() {
         bindViewModel()
     }
 
-    private fun bindViewModel() {
+    override fun bindViewModel() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+    }
+
+    override fun setObservers() {
+        viewModel.toShowNetworkErrorDialog.observe(viewLifecycleOwner) { toShow ->
+            if (toShow) {
+
+            }
+        }
     }
 }

@@ -1,10 +1,9 @@
 package com.movingroot.storyfromnowhere.data.model
 
-import java.util.Date
-
+@kotlinx.serialization.Serializable
 data class User(
     val uniqueId: String,
     val nickName: String,
     val password: String,
-    val createdAt: Date
+    val createdAt: String
 )

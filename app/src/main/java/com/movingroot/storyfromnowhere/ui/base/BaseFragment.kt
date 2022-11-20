@@ -1,6 +1,7 @@
 package com.movingroot.storyfromnowhere.ui.base
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +15,11 @@ open class BaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBaseFragment()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initFragment()
     }
 
     private fun initBaseFragment() {
@@ -33,5 +39,16 @@ open class BaseFragment : Fragment() {
         viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.DESTROYED) {
             _binding = null
         }
+    }
+
+    private fun initFragment() {
+        bindViewModel()
+        setObservers()
+    }
+
+    protected open fun bindViewModel() {
+    }
+
+    protected open fun setObservers() {
     }
 }
