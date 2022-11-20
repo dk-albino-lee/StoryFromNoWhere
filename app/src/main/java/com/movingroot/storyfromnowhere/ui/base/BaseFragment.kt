@@ -19,7 +19,6 @@ open class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initFragment()
     }
 
     private fun initBaseFragment() {
@@ -39,11 +38,6 @@ open class BaseFragment : Fragment() {
         viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.DESTROYED) {
             _binding = null
         }
-    }
-
-    private fun initFragment() {
-        bindViewModel()
-        setObservers()
     }
 
     protected open fun bindViewModel() {
