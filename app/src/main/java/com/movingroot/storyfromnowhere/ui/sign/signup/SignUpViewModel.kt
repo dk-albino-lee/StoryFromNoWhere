@@ -4,7 +4,7 @@ import com.movingroot.storyfromnowhere.ui.base.BaseViewModel
 
 class SignUpViewModel : BaseViewModel() {
     init {
-        TAG = "SignUpViewModel"
+        TAG = this::class.java.simpleName
     }
 
 }

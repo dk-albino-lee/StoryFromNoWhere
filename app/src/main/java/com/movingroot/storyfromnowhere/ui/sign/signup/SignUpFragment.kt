@@ -27,7 +27,7 @@ class SignUpFragment : BaseFragment() {
         bindViewModel()
     }
 
-    private fun bindViewModel() {
+    override fun bindViewModel() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
     }

@@ -2,9 +2,9 @@ package com.movingroot.storyfromnowhere.ui
 
 import com.movingroot.storyfromnowhere.ui.base.BaseViewModel
 
-class MainViewModel : BaseViewModel() {
+class MainActivityViewModel : BaseViewModel() {
     init {
-        TAG = "MainViewModel"
+        TAG = this::class.java.simpleName
     }
 
 }
