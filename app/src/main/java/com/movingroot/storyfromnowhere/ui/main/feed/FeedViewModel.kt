@@ -1,4 +1,4 @@
-package com.movingroot.storyfromnowhere.ui.main
+package com.movingroot.storyfromnowhere.ui.main.feed
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

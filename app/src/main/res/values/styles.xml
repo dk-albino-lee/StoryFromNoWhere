@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="input">
+        <item name="android:background">@drawable/input_selector</item>
+        <item name="android:paddingHorizontal">10dp</item>
+        <item name="android:paddingVertical">8dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/input</item>
+    </style>
+</resources>

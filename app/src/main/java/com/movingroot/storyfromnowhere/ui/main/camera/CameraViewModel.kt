@@ -1,4 +1,4 @@
-package com.movingroot.storyfromnowhere.ui.main
+package com.movingroot.storyfromnowhere.ui.main.camera
 
 import com.movingroot.storyfromnowhere.ui.base.BaseViewModel
 

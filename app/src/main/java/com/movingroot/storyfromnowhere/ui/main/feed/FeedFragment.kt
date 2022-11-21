@@ -1,4 +1,4 @@
-package com.movingroot.storyfromnowhere.ui.main
+package com.movingroot.storyfromnowhere.ui.main.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class FeedFragment : BaseFragment() {
     private val binding: FragmentFeedBinding get() = _binding!! as FragmentFeedBinding

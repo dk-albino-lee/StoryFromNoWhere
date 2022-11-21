@@ -29,7 +29,7 @@
         android:label="MainFragment" />
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.movingroot.storyfromnowhere.ui.main.FeedFragment"
+        android:name="com.movingroot.storyfromnowhere.ui.main.feed.FeedFragment"
         android:label="FeedFragment" >
         <action
             android:id="@+id/action_feedFragment_to_editFragment"
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.movingroot.storyfromnowhere.ui.main.CameraFragment"
+        android:name="com.movingroot.storyfromnowhere.ui.main.camera.CameraFragment"
         android:label="CameraFragment" >
         <action
             android:id="@+id/action_cameraFragment_to_labelFragment"
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/labelFragment"
-        android:name="com.movingroot.storyfromnowhere.ui.main.LabelFragment"
+        android:name="com.movingroot.storyfromnowhere.ui.main.label.LabelFragment"
         android:label="LabelFragment" >
         <action
             android:id="@+id/action_labelFragment_to_cameraFragment"
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/editFragment"
-        android:name="com.movingroot.storyfromnowhere.ui.main.EditFragment"
+        android:name="com.movingroot.storyfromnowhere.ui.main.edit.EditFragment"
         android:label="EditFragment" >
         <action
             android:id="@+id/action_editFragment_to_feedFragment"
