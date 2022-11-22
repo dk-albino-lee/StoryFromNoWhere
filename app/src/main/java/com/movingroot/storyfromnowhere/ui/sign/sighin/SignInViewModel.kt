@@ -15,10 +15,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SignInViewModel : BaseViewModel() {
-    init {
-        TAG = this::class.java.simpleName
-    }
-
     val _nickNameInput = MutableLiveData("")
     val nickNameInput: LiveData<String> get() = _nickNameInput
     val _passwordInput = MutableLiveData("")
@@ -38,26 +34,38 @@ class SignInViewModel : BaseViewModel() {
     val signUpFlag: LiveData<Boolean> get() = _signUpFlag
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
+    val _autoSignIn = MutableLiveData<Boolean>()
+    val autoSignIn: LiveData<Boolean> get() = _autoSignIn
+    val _rememberNickname = MutableLiveData<Boolean>()
+    val rememberNickname: LiveData<Boolean> get() = _rememberNickname
+
+    init {
+        TAG = this::class.java.simpleName
+    }
 
     private fun isReadyToMoveOn(): Boolean {
-        if (nickNameInput.value!!.length >= 2 && passwordInput.value!!.length >= 6)
-            return true
+        if (nickNameInput.value!!.length < 2)
+            return false
+        if (passwordInput.value!!.length < 6)
+            return false
         return false
+    }
+
+    fun retrieveSavedCheckBoxValue(isAutoSignIn: Boolean, isRememberPassword: Boolean) {
+        _autoSignIn.value = isAutoSignIn
+        _rememberNickname.value = isRememberPassword
+    }
+
+    fun retrieveNicknameIfRemembered(savedNickname: String) {
+        if (rememberNickname.value!!)
+            _nickNameInput.value = savedNickname
     }
 
     fun initializeToast() {
         _toastMessage.value = ""
     }
 
-    fun toSignInPage() {
-        if (nickNameInput.value!!.length < 2) {
-            _toastMessage.value = "별명은 2자 이상 입력해주세요."
-            return
-        }
-        if (passwordInput.value!!.length < 6) {
-            _toastMessage.value = "비밀번호는 6자 이상 입력해주세요."
-            return
-        }
+    fun startSignIn() {
         job = viewModelScope.launch(Dispatchers.IO) {
             val process = async { requestSignIn() }
             val result = process.await()

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.movingroot.storyfromnowhere.databinding.FragmentSignUpBinding
+import com.movingroot.storyfromnowhere.ui.MainActivity
 import com.movingroot.storyfromnowhere.ui.base.BaseFragment
 
 class SignUpFragment : BaseFragment() {
@@ -30,5 +31,11 @@ class SignUpFragment : BaseFragment() {
     override fun bindViewModel() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+    }
+
+    override fun setObservers() {
+        viewModel.toSignIn.observe(viewLifecycleOwner) {
+            (requireActivity() as MainActivity).moveFromSignUpToSignIn()
+        }
     }
 }

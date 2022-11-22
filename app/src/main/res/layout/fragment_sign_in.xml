@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/light_olive"
             android:paddingHorizontal="10dp"
@@ -24,6 +24,8 @@
             android:textColor="@color/dark_brown"
             android:textSize="24dp"
             android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintWidth_percent=".6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +36,7 @@
             style="@style/input"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/nickname"
+            android:hint="@string/nickname_hint"
             android:text="@={viewModel._nickNameInput}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/title"
@@ -43,10 +45,11 @@
             app:layout_constraintVertical_bias=".4" />
 
         <EditText
+            android:id="@+id/edit_password"
             style="@style/input"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
+            android:hint="@string/password_hint"
             android:text="@={viewModel._passwordInput}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/title"
@@ -54,13 +57,31 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias=".48" />
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/edit_password"
+            app:layout_constraintStart_toStartOf="@id/title"
+            android:layout_marginTop="5dp"
+            android:checked="@={viewModel._rememberNickname}"
+            android:text="@string/remember_nickname" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/edit_password"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            android:layout_marginTop="5dp"
+            android:checked="@={viewModel._autoSignIn}"
+            android:text="@string/auto_sign_in" />
+
         <Button
             android:id="@+id/btnSignIn"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/btn_selector"
             android:enabled="@{viewModel.isSignInEnabled()}"
-            android:onClick="@{() -> viewModel.toSignInPage()}"
+            android:onClick="@{() -> viewModel.startSignIn()}"
             android:stateListAnimator="@null"
             android:text="@string/sign_in"
             android:textSize="@dimen/btn_desc"

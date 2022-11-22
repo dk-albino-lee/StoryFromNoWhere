@@ -3,9 +3,12 @@ package com.movingroot.storyfromnowhere.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.movingroot.storyfromnowhere.R
 import com.movingroot.storyfromnowhere.databinding.ActivityMainBinding
+import com.movingroot.storyfromnowhere.ui.sign.sighin.SignInFragmentDirections
+import com.movingroot.storyfromnowhere.ui.sign.signup.SignUpFragmentDirections
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -36,5 +39,20 @@ class MainActivity : AppCompatActivity() {
             }
 
         navHost.navController.setGraph(graph, Bundle())
+    }
+
+    fun moveFromSignInToMain() {
+        val action = SignInFragmentDirections.actionSignInFragmentToMainFragment()
+        binding.root.findNavController().navigate(action)
+    }
+
+    fun moveFromSignInToSignUp() {
+        val action = SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
+        binding.root.findNavController().navigate(action)
+    }
+
+    fun moveFromSignUpToSignIn() {
+        val action = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
+        binding.root.findNavController().navigate(action)
     }
 }

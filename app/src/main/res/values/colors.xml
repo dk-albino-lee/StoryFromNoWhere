@@ -18,4 +18,5 @@
     <color name="light_olive">#FF929762</color>
 
     <color name="light_gray">#FFE8E9EC</color>
+    <color name="transparent">#00000000</color>
 </resources>
