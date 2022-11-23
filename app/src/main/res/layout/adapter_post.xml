@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="post"
+            type="com.movingroot.storyfromnowhere.data.model.Post" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/white_with_black_border">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            android:contentDescription="포스트 이미지"
+            tools:src="@drawable/sample_01"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/labels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            tools:text="계단, 지붕, 회색, 창문" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labels"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/dark_brown"
+            android:textSize="15dp"
+            android:text="@{post.title}"
+            tools:text="그 여름에 오르다." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/title"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            android:gravity="end"
+            android:text="@{post.createdAt}"
+            tools:text="2018.09.25" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            android:layout_marginTop="15dp"
+            android:textSize="11dp"
+            android:textColor="@color/dark_olive"
+            android:text="@{post.content}"
+            tools:text="교토, 아니면 오사카에서. 4년 전 여름이었다. 날씨조차 기억나지 않고, 왜 찍었는지도 모르겠는 사진을 두고. 고른 이유는 순전히 용량이 작아서다." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

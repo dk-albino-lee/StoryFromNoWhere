@@ -14,30 +14,19 @@ open class BaseFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initBaseFragment()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun initBaseFragment() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            setResumeAction()
-            setDestroyAction()
-        }
+    override fun onResume() {
+        super.onResume()
     }
 
-    protected suspend fun setResumeAction() {
-        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-
-        }
-    }
-
-    protected suspend fun setDestroyAction() {
-        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.DESTROYED) {
-            _binding = null
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     protected open fun bindViewModel() {

@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 class FeedFragment : BaseFragment() {
     private val binding: FragmentFeedBinding get() = _binding!! as FragmentFeedBinding
     private val viewModel: FeedViewModel by viewModels()
-    private val postList: MutableList<Post> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +36,7 @@ class FeedFragment : BaseFragment() {
     private fun initFragment() {
         bindViewModel()
         setObservers()
+        setView()
         loadData()
     }
 
@@ -49,8 +49,12 @@ class FeedFragment : BaseFragment() {
     override fun setObservers() {
         super.setObservers()
         viewModel.posts.observe(viewLifecycleOwner) { posts ->
-            postList.addAll(posts)
+            (binding.feedRecycler.adapter as PostAdapter).submitList(posts)
         }
+    }
+
+    private fun setView() {
+        binding.feedRecycler.adapter = PostAdapter()
     }
 
     private fun loadData() {

@@ -1,11 +1,13 @@
 package com.movingroot.storyfromnowhere.ui.sign.sighin
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.movingroot.storyfromnowhere.BaseApplication
 import com.movingroot.storyfromnowhere.databinding.FragmentSignInBinding
 import com.movingroot.storyfromnowhere.ui.MainActivity
 import com.movingroot.storyfromnowhere.ui.base.BaseFragment
@@ -18,6 +20,9 @@ import kotlinx.coroutines.launch
 class SignInFragment : BaseFragment() {
     private val binding: FragmentSignInBinding get() = _binding!! as FragmentSignInBinding
     private val viewModel: SignInViewModel by viewModels()
+    private val dataStoreModule: DataStoreModule by lazy {
+        BaseApplication.getInstance().getDataStoreModule()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +37,7 @@ class SignInFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindViewModel()
+        setObservers()
         retrieveValues()
     }
 
@@ -73,27 +79,29 @@ class SignInFragment : BaseFragment() {
 
     private suspend fun retrieveCheckBox() {
         viewModel.retrieveSavedCheckBoxValue(
-            DataStoreModule(requireContext()).retrieveBoolean("auto_sign_in").first(),
-            DataStoreModule(requireContext()).retrieveBoolean("remember_nickname").first()
+            dataStoreModule.retrieveBoolean("auto_sign_in").first(),
+            dataStoreModule.retrieveBoolean("remember_nickname").first()
         )
     }
 
     private suspend fun retrieveNickname() {
-        viewModel.retrieveNicknameIfRemembered(DataStoreModule(requireContext()).retrieveString("nickname").first())
+        viewModel.retrieveNicknameIfRemembered(dataStoreModule.retrieveString("nickname").first())
     }
 
     private fun saveSettings() {
         CoroutineScope(Dispatchers.Main).launch {
-            saveNickname()
-            saveAutoSignInValue()
+            if (viewModel.rememberNickname.value!!)
+                saveNickname()
+            if (viewModel.autoSignIn.value!!)
+                saveAutoSignInValue()
         }
     }
 
     private suspend fun saveNickname() {
-        DataStoreModule(requireContext()).storeValue("remember_nickname", viewModel.nickNameInput.value!!)
+        dataStoreModule.storeValue("nickname", viewModel.nickNameInput.value!!)
     }
 
     private suspend fun saveAutoSignInValue() {
-        DataStoreModule(requireContext()).storeValue("auto_sign_in", viewModel.autoSignIn.value!!)
+        dataStoreModule.storeValue("auto_sign_in", viewModel.autoSignIn.value!!)
     }
 }

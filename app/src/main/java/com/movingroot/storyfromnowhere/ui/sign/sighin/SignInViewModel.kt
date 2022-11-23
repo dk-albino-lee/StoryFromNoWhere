@@ -48,7 +48,7 @@ class SignInViewModel : BaseViewModel() {
             return false
         if (passwordInput.value!!.length < 6)
             return false
-        return false
+        return true
     }
 
     fun retrieveSavedCheckBoxValue(isAutoSignIn: Boolean, isRememberPassword: Boolean) {
@@ -92,5 +92,4 @@ class SignInViewModel : BaseViewModel() {
     fun toSignUpPage() {
         _signUpFlag.value = true
     }
-
 }

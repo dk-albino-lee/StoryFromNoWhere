@@ -1,8 +1,10 @@
 package com.movingroot.storyfromnowhere.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.movingroot.storyfromnowhere.R
@@ -43,16 +45,16 @@ class MainActivity : AppCompatActivity() {
 
     fun moveFromSignInToMain() {
         val action = SignInFragmentDirections.actionSignInFragmentToMainFragment()
-        binding.root.findNavController().navigate(action)
+        binding.navHostFragment.findNavController().navigate(action)
     }
 
     fun moveFromSignInToSignUp() {
         val action = SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
-        binding.root.findNavController().navigate(action)
+        binding.navHostFragment.findNavController().navigate(action)
     }
 
     fun moveFromSignUpToSignIn() {
         val action = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
-        binding.root.findNavController().navigate(action)
+        binding.navHostFragment.findNavController().navigate(action)
     }
 }
