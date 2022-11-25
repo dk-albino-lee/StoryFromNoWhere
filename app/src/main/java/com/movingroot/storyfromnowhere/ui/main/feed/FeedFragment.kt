@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.movingroot.storyfromnowhere.BaseApplication
-import com.movingroot.storyfromnowhere.data.model.Post
 import com.movingroot.storyfromnowhere.databinding.FragmentFeedBinding
 import com.movingroot.storyfromnowhere.ui.base.BaseFragment
 import com.movingroot.storyfromnowhere.util.Constants
