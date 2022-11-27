@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/page_feed"
+        android:enabled="true"
+        android:title="@string/menu_feed"
+        android:icon="@drawable/ic_feed" />
+
+    <item
+        android:id="@+id/page_photo"
+        android:enabled="true"
+        android:title="@string/menu_take_photo"
+        android:icon="@drawable/ic_add_photo" />
+
+    <item
+        android:id="@+id/page_more"
+        android:enabled="true"
+        android:title="@string/menu_more"
+        android:icon="@drawable/ic_more" />
+
+</menu>

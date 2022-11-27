@@ -15,4 +15,8 @@
     <string name="error_title">오류가 발생했습니다.</string>
     <string name="network_error_content">데이터 수신에 실패했습니다.\n네트워크 상태를 확인해주세요.</string>
 
+    <string name="menu_feed">피드</string>
+    <string name="menu_take_photo">촬영</string>
+    <string name="menu_more">더보기</string>
+
 </resources>

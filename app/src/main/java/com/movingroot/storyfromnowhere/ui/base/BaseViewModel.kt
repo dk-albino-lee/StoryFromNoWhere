@@ -89,7 +89,8 @@ open class BaseViewModel : ViewModel() {
 
     override fun onCleared() {
         job = null
-        client.close()
+        if (this::client.isInitialized)
+            client.close()
         super.onCleared()
     }
 }

@@ -3,7 +3,13 @@ package com.movingroot.storyfromnowhere.ui.sign.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.movingroot.storyfromnowhere.data.network.FirebaseObject
 import com.movingroot.storyfromnowhere.ui.base.BaseViewModel
+import com.movingroot.storyfromnowhere.util.Constants
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SignUpViewModel : BaseViewModel() {
     init {
@@ -26,10 +32,21 @@ class SignUpViewModel : BaseViewModel() {
             }
         }
 
-    fun requestSigningUp() {
-        // TODO : 회원가입 호출
+    fun startSignUp() {
+        job = viewModelScope.launch(Dispatchers.IO) {
+            processSignUp()
+        }
+    }
 
-        toSignIn()
+    private suspend fun processSignUp() {
+        val ret = FirebaseObject.signUp(inputNickname.value!!, inputPassword.value!!)
+        if (ret.code == Constants.NetworkConst.IS_FAILED) {
+            // TODO : Failed Dialog
+            return
+        }
+        withContext(Dispatchers.Main) {
+            toSignIn()
+        }
     }
 
     fun toSignIn() {

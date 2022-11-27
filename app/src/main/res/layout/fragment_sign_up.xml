@@ -56,7 +56,7 @@
             android:layout_height="0dp"
             android:background="@drawable/btn_selector"
             android:enabled="@{viewModel.isSignUpEnabled()}"
-            android:onClick="@{() -> viewModel.requestSigningUp()}"
+            android:onClick="@{() -> viewModel.startSignUp()}"
             android:stateListAnimator="@null"
             android:text="@string/sign_up"
             android:textSize="@dimen/btn_desc"

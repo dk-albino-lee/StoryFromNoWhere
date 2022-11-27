@@ -35,9 +35,9 @@ object FirebaseObject {
             .result
     }
 
-    fun getPosts(uniqueId: String): ModelResponse<List<Post>> {
+    fun getPosts(): ModelResponse<List<Post>> {
         return callInstance
-            .getPosts(uniqueId)
+            .getPosts()
             .addOnCompleteListener { task ->
                 handleFirebaseException(task)
             }

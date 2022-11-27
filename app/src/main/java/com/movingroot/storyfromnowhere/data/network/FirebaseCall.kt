@@ -4,9 +4,13 @@ package com.movingroot.storyfromnowhere.data.network
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.functions.HttpsCallableReference
+import com.google.firebase.functions.HttpsCallableResult
 import com.movingroot.storyfromnowhere.data.model.ModelResponse
 import com.movingroot.storyfromnowhere.data.model.Post
 import com.movingroot.storyfromnowhere.data.model.User
+import com.movingroot.storyfromnowhere.util.Constants
+import java.util.concurrent.TimeUnit
 
 /**
  * FirebaseObject 에서 호출할 함수들의 기본 설정을 저장한다.
@@ -15,33 +19,13 @@ import com.movingroot.storyfromnowhere.data.model.User
  */
 class FirebaseCall(private val functions: FirebaseFunctions) {
 
-    // Sample function from https://firebase.google.com/docs/functions/callable
-    fun addMessage(message: String): Task<String> {
-        // Create the arguments to the callable function.
-        val data = hashMapOf(
-            "message" to message,
-            "push" to true
-        )
-
-        return functions
-            .getHttpsCallable("addMessage")
-            .call(data)
-            .continueWith { task ->
-                // This continuation runs on either success or failure,
-                // but if the task has failed, then result will throw an Exception
-                task.result?.data as String
-            }
-    }
-
     fun signIn(nickname: String, password: String): Task<ModelResponse<User>> {
         val data = hashMapOf(
             "nickname" to nickname,
             "password" to password
         )
 
-        return functions
-            .getHttpsCallable("signIn")
-            .call(data)
+        return makeCall("signIn", data)
             .continueWith { task ->
                 task.result?.data as ModelResponse<User>
             }
@@ -53,24 +37,44 @@ class FirebaseCall(private val functions: FirebaseFunctions) {
             "password" to password
         )
 
-        return functions
-            .getHttpsCallable("signUp")
-            .call(data)
+        return makeCall("signUp", data)
             .continueWith { task ->
                 task.result?.data as ModelResponse<User>
             }
     }
 
-    fun getPosts(uniqueId: String): Task<ModelResponse<List<Post>>> {
+    fun getPosts(): Task<ModelResponse<List<Post>>> {
         val data = hashMapOf(
-            "uniqueId" to uniqueId
+            "uniqueId" to Constants.signedInUser?.uniqueId
         )
 
-        return functions
-            .getHttpsCallable("posts")
-            .call(data)
+        return makeCall("posts", data)
             .continueWith { task ->
                 task.result?.data as ModelResponse<List<Post>>
+            }
+    }
+
+    fun deletePost(postId: String): Task<ModelResponse<Boolean>> {
+        val data = hashMapOf(
+            "uniqueId" to Constants.signedInUser?.uniqueId
+        )
+
+        return makeCall("delete/post", data)
+            .continueWith { task ->
+                task.result?.data as ModelResponse<Boolean>
+            }
+    }
+
+    private fun <T> makeCall(name: String, data: HashMap<String, T>): Task<HttpsCallableResult> {
+        return makeCallable(name)
+            .call(data)
+    }
+
+    private fun makeCallable(name: String): HttpsCallableReference {
+        return functions
+            .getHttpsCallable(name)
+            .apply {
+                setTimeout(Constants.NetworkConst.TIME_OUT, TimeUnit.SECONDS)
             }
     }
 

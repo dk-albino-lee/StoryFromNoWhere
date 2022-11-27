@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.movingroot.storyfromnowhere.data.model.Dummies
 import com.movingroot.storyfromnowhere.data.model.ModelResponse
 import com.movingroot.storyfromnowhere.data.model.User
+import com.movingroot.storyfromnowhere.data.network.FirebaseObject
 import com.movingroot.storyfromnowhere.ui.base.BaseViewModel
 import com.movingroot.storyfromnowhere.util.Constants
 import kotlinx.coroutines.Dispatchers
@@ -67,26 +68,20 @@ class SignInViewModel : BaseViewModel() {
 
     fun startSignIn() {
         job = viewModelScope.launch(Dispatchers.IO) {
-            val process = async { requestSignIn() }
-            val result = process.await()
-            if (result.code == Constants.NetworkConst.IS_FAILED) {
-
-                return@launch
-            }
-            if (result.data == null) {
-
-                return@launch
-            }
-            withContext(Dispatchers.Main) {
-                Constants.signedInUser = result.data
-                _signInFlag.value = true
-            }
+            processSignIn()
         }
     }
 
-    private suspend fun requestSignIn(): ModelResponse<User?> {
-
-        return ModelResponse(Constants.NetworkConst.IS_SUCCESS, Dummies.makeDummyUser())
+    private suspend fun processSignIn() {
+        val ret = FirebaseObject.signIn(nickNameInput.value!!, passwordInput.value!!)
+        if (ret.code == Constants.NetworkConst.IS_FAILED) {
+            // TODO : Failed Dialog
+            return
+        }
+        withContext(Dispatchers.Main) {
+            Constants.signedInUser = ret.data
+            _signInFlag.value = true
+        }
     }
 
     fun toSignUpPage() {
